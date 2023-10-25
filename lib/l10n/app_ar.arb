@@ -1,0 +1,14 @@
+{
+  "@@locale": "ar",
+  "defaulttitle": "تطبيق الأخبار",
+  "news": "أخبار",
+  "sports": "رياضة",
+  "bis": "أعمال",
+  "health": "صحة",
+  "politics": "سياسة",
+  "enviroment": "بيئة",
+  "science": "علوم",
+  "category": "التصنيفات",
+  "pick": "اختر تصنيفك\nالمفضل",
+  "search": "بحث..."
+}

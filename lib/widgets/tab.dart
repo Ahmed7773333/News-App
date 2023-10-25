@@ -12,23 +12,18 @@ class TabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        isSelected = isSelected == false ? true : false;
-      },
-      child: Container(
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
-        decoration: BoxDecoration(
-          color: isSelected ? greenColor : Colors.transparent,
-          border: Border.all(color: greenColor),
-          borderRadius: BorderRadius.circular(35.r),
-        ),
-        child: Text(
-          sources.name ?? '',
-          style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: isSelected ? Colors.white : greenColor,
-              ),
-        ),
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 10.w),
+      decoration: BoxDecoration(
+        color: isSelected ? greenColor : Colors.transparent,
+        border: Border.all(color: greenColor),
+        borderRadius: BorderRadius.circular(35.r),
+      ),
+      child: Text(
+        sources.name ?? '',
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              color: isSelected ? Colors.white : greenColor,
+            ),
       ),
     );
   }

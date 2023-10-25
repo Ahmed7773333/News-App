@@ -1,0 +1,14 @@
+{
+  "@@locale": "en",
+  "defaulttitle": "News App",
+  "news": "News",
+  "sports": "Sports",
+  "bis": "Business",
+  "health": "Health",
+  "politics": "Politics",
+  "enviroment": "Enviroment",
+  "science": "Science",
+  "category": "Categories",
+  "pick": "Pick your category\nof interest",
+  "search": "Search..."
+}
