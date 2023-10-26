@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:news_app/providers/language_provider.dart';
 import 'package:news_app/screens/home_layout.dart';
+import 'package:news_app/screens/splach.dart';
 import 'package:news_app/theming/app_theme.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -25,11 +26,12 @@ class NewsApp extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           debugShowCheckedModeBanner: false,
-          initialRoute: HomeLayout.routeName,
+          initialRoute: SplachScreen.routeName,
           theme: AppTheme.lightMode,
           locale: Provider.of<LanguageProvider>(context).locale,
           routes: {
             HomeLayout.routeName: (context) => const HomeLayout(),
+            SplachScreen.routeName: (context) => const SplachScreen(),
           },
         ));
   }

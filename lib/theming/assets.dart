@@ -5,3 +5,4 @@ String judge = 'assets/judge.png';
 String bis = 'assets/bis.png';
 String science = 'assets/science.png';
 String green = 'assets/green.png';
+String logo = 'assets/splach.png';
