@@ -25,7 +25,7 @@ class AppTheme {
       ),
       bodyLarge: GoogleFonts.poppins(
         fontSize: 30,
-        color: Colors.black,
+        color: Colors.white,
         fontWeight: FontWeight.w400,
       ),
     ),

@@ -5,6 +5,7 @@ import 'package:news_app/screens/home_screen.dart';
 import 'package:news_app/widgets/category_data.dart';
 import 'package:news_app/widgets/drawer.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:news_app/widgets/text_field.dart';
 
 class HomeLayout extends StatefulWidget {
   static const String routeName = '/home';
@@ -17,55 +18,63 @@ class HomeLayout extends StatefulWidget {
 class _HomeLayoutState extends State<HomeLayout> {
   bool isSearchVisible = false;
 
-  void toggleSearchBarVisibility() {
-    setState(() {
-      isSearchVisible = !isSearchVisible;
-    });
-  }
-
   final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: DrawerScree(onClicked: onDrawerClicked),
       appBar: AppBar(
-        title: Text(
-          categoryData == null
-              ? AppLocalizations.of(context)?.defaulttitle ?? 'title'
-              : categoryData!.text,
-          style: Theme.of(context).textTheme.bodyLarge,
+        title: Stack(
+          children: [
+            Visibility(
+              visible: isSearchVisible,
+              child: CustomTextField(
+                controller: searchController,
+                hint: AppLocalizations.of(context)?.search ?? '',
+                onPreClicked: onPreClicked,
+                func: submit,
+              ),
+            ),
+            Visibility(
+              visible: !isSearchVisible,
+              child: Row(
+                children: [
+                  const Spacer(
+                    flex: 2,
+                  ),
+                  Text(
+                    categoryData == null
+                        ? AppLocalizations.of(context)?.defaulttitle ?? 'title'
+                        : categoryData!.text,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  const Spacer(
+                    flex: 3,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isSearchVisible = true;
+                      });
+                    },
+                    child: Visibility(
+                      visible: !(categoryData == null),
+                      child: Icon(
+                        Icons.search,
+                        color: Colors.white,
+                        size: 30.sp,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(25.r),
           ),
-        ),
-        bottom: PreferredSize(
-          preferredSize: Size.fromHeight(30.h),
-          child: categoryData == null
-              ? Container()
-              : TextField(
-                  controller: searchController,
-                  decoration: InputDecoration(
-                    prefixIcon: InkWell(
-                        onTap: () {
-                          q = '';
-                          searchController.clear();
-                          setState(() {});
-                        },
-                        child: const Icon(Icons.close)),
-                    suffixIcon:
-                        InkWell(onTap: () {}, child: const Icon(Icons.search)),
-                    hintText: AppLocalizations.of(context)?.search ?? 'sear',
-                    hintStyle: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  onSubmitted: (query) {
-                    setState(() {
-                      q = searchController.text;
-                      debugPrint(q);
-                    });
-                  },
-                ),
         ),
       ),
       body: categoryData == null
@@ -86,10 +95,24 @@ class _HomeLayoutState extends State<HomeLayout> {
   }
 
   void onDrawerClicked() {
+    isSearchVisible = false;
     categoryData = null;
     searchController.clear();
     q = '';
     Navigator.pop(context);
     setState(() {});
+  }
+
+  void onPreClicked() {
+    isSearchVisible = false;
+    searchController.clear();
+    q = '';
+    setState(() {});
+  }
+
+  void submit() {
+    setState(() {
+      q = searchController.text;
+    });
   }
 }

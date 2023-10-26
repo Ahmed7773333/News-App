@@ -16,7 +16,10 @@ class CategoriesScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(AppLocalizations.of(context)?.pick ?? 'pick',
-            style: Theme.of(context).textTheme.bodyLarge),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(fontSize: 25, fontWeight: FontWeight.w600)),
         Expanded(
           child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
