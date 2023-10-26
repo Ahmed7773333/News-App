@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -8,7 +9,12 @@ import 'package:news_app/widgets/tab.dart';
 
 class TabsController extends StatefulWidget {
   final List<Sources> sources;
-  const TabsController({super.key, required this.sources});
+  final String? q;
+  const TabsController({
+    Key? key,
+    required this.sources,
+    this.q,
+  }) : super(key: key);
 
   @override
   State<TabsController> createState() => _TabsControllerState();
@@ -41,7 +47,8 @@ class _TabsControllerState extends State<TabsController> {
           ),
         ),
         FutureBuilder<NewsResponce>(
-          future: ApiManager.getNews(widget.sources[selectedIndex].id ?? ''),
+          future: ApiManager.getNews(
+              widget.sources[selectedIndex].id ?? '', widget.q ?? ''),
           builder: (context, snapshot) {
             var news = snapshot.data?.articles ?? [];
             if (snapshot.connectionState == ConnectionState.waiting) {
